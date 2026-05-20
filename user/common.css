@@ -1,0 +1,187 @@
+/* 全局重置与基础设置 —— 初始化页面，清除浏览器默认样式 */
+* {
+    margin: 0;            /* 清除所有元素默认的外边距 */
+    padding: 0;           /* 清除所有元素默认的内边距 */
+    box-sizing: border-box;/* 让盒子的宽高包含边框和内边距，布局更稳定 */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* 设置全局通用字体，适配苹果/安卓/Windows */
+}
+
+/* 页面整体背景和布局 */
+body {
+    /* 降低饱和度，浅灰蓝更淡雅 */
+    background: linear-gradient(135deg, #edf3f6 0%, #dce7ec 50%, #cddbe2 100%);
+    min-height: 100vh;         /* 让页面高度至少占满整个屏幕 */
+    display: flex;             /* 使用弹性布局，方便居中 */
+    justify-content: center;   /* 水平居中 */
+    align-items: center;       /* 垂直居中 */
+    padding: 20px;             /* 手机端留出边距，不会贴边 */
+}
+
+/* 表单容器 —— 白色大卡片，包裹登录/注册/输入内容 */
+form {
+    background-color: #ffffff; /* 背景白色 */
+    padding: 45px 50px;         /* 内边距：内容距离边框 */
+    border-radius: 20px;        /* 大圆角，让卡片更美观 */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12); /* 降低阴影透明度，更柔和 */
+    width: 100%;                /* 默认宽度100% */
+    max-width: 480px;           /* 最大宽度480px，不会太宽 */
+    animation: fadeIn 0.5s ease; /* 淡入动画 */
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 页面大标题（H1），比如：登录、注册、修改信息 */
+.page-title {
+    font-size: 28px;      /* 字体大小28px */
+    font-weight: 700;     /* 加粗 */
+    color: #1a1a2e;       /* 深色文字 */
+    text-align: center;   /* 文字居中 */
+    margin-bottom: 35px;  /* 标题下方留出35px间距 */
+    letter-spacing: 2px;  /* 文字间距稍微拉开，更美观 */
+    position: relative;   /* 相对定位，用于添加装饰 */
+}
+
+/* 标题下方装饰线 —— 降饱和浅化 */
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #94b9c6, #a8c8d2);
+    border-radius: 2px;
+}
+
+/* 表单标签样式，如：用户名、密码、邮箱 */
+label {
+    display: block;       /* 独占一行 */
+    margin: 20px 0 8px;    /* 距离上方20px，距离下方8px */
+    color: #333333;        /* 深灰色文字 */
+    font-size: 15px;       /* 字体大小15px */
+    font-weight: 500;      /* 字体稍粗，更醒目 */
+}
+
+/* 第一个标签顶部不要留太大间距 */
+label:first-of-type {
+    margin-top: 0;
+}
+
+/* 输入框样式：文本框、密码框、数字框 */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"] {
+    width: 100%;            /* 宽度占满一行 */
+    padding: 14px 18px;     /* 内边距，让输入框更大更好点 */
+    border: 2px solid #e8e8e8; /* 边框 */
+    border-radius: 10px;    /* 圆角10px */
+    font-size: 15px;        /* 字体大小 */
+    outline: none;          /* 去掉浏览器默认的蓝色高亮框 */
+    transition: all 0.3s ease; /* 过渡动画 */
+    background-color: #fafafa; /* 浅色背景 */
+}
+
+/* 输入框获得焦点（点击后）的高亮效果 —— 降饱和 */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus {
+    border-color: #94b9c6;
+    box-shadow: 0 0 0 4px rgba(148, 185, 198, 0.12);
+    background-color: #fff;       /* 背景变白 */
+}
+
+/* 复选框样式，如：记住我、同意协议 */
+input[type="checkbox"] {
+    width: auto;           /* 不占满宽度，保持原生大小 */
+    margin-right: 8px;     /* 右边和文字隔开8px */
+    vertical-align: middle;/* 和文字垂直居中对齐 */
+}
+
+/* 红色错误提示文字 */
+span[style="color: red"] {
+    color: #dc2626 !important; /* 降低红色饱和度，不刺眼 */
+    font-size: 13px;            /* 小字体 */
+    display: block;             /* 独占一行 */
+    margin: 6px 0 0;            /* 上方间距6px */
+}
+
+/* 绿色成功提示文字 */
+span[style="color: green"] {
+    color: #059669 !important; /* 降低绿色饱和度，更柔和 */
+    font-size: 14px;           /* 字体大小 */
+    display: block;            /* 独占一行 */
+    margin: 15px 0;            /* 上下间距15px */
+    font-weight: 500;          /* 稍粗 */
+    text-align: center;        /* 居中 */
+}
+
+/* 按钮居中容器 */
+.button-group {
+    text-align: center;    /* 让里面的按钮水平居中 */
+    margin-top: 20px;      /* 距离上方表单20px */
+}
+
+/* 按钮通用样式 */
+button {
+    padding: 14px 32px;    /* 内边距，按钮更大更好看 */
+    margin: 0 8px;         /* 按钮之间左右间隔8px */
+    border: none;          /* 去掉默认边框 */
+    border-radius: 10px;   /* 圆角10px */
+    font-size: 16px;       /* 字体稍大 */
+    font-weight: 600;      /* 字体稍粗 */
+    cursor: pointer;       /* 鼠标放上去变成小手 */
+    transition: all 0.3s ease; /* 过渡动画 */
+}
+
+/* 提交按钮（渐变淡青色）—— 整体降饱和 */
+button[type="submit"] {
+    background: linear-gradient(135deg, #94b9c6 0%, #a8c8d2 100%);
+    color: #fff;                /* 白色文字 */
+    box-shadow: 0 4px 15px rgba(148, 185, 198, 0.25);
+}
+
+/* 提交按钮鼠标悬浮效果 */
+button[type="submit"]:hover {
+    transform: translateY(-2px); /* 上移 */
+    box-shadow: 0 6px 20px rgba(148, 185, 198, 0.35);
+}
+
+/* 普通按钮（灰色）：返回、重置、取消 */
+button[type="button"] {
+    background-color: #f0f0f0; /* 浅灰色背景 */
+    color: #666;                /* 深灰文字 */
+}
+
+/* 普通按钮鼠标悬浮效果 */
+button[type="button"]:hover {
+    background-color: #e0e0e0; /* 颜色变深 */
+    transform: translateY(-2px); /* 上移 */
+}
+
+/* 移动端适配 —— 屏幕小于520px时自动调整 */
+@media (max-width: 520px) {
+    form {
+        padding: 35px 25px; /* 减小内边距 */
+    }
+    button {
+        width: 100%;     /* 按钮占满一行 */
+        margin: 10px 0;   /* 上下排列 */
+    }
+    .page-title {
+        font-size: 24px;
+    }
+}
